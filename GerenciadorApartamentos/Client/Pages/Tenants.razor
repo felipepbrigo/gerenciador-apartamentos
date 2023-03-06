@@ -1,0 +1,53 @@
+﻿@page "/tenants"
+@inject ITenantService TenantService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Locatário</PageTitle>
+
+<h3>Locatário</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Endereço</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (TenantService.Tenants != null)
+        {
+            @foreach (var tenant in TenantService.Tenants)
+            {
+                <tr>
+                    <td>@tenant.Name</td>
+                    <td>@tenant.CPF</td>
+                    <td>@tenant.Address</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="(()=> UpdateTenant(tenant.Id))"><i class=" oi oi-pencil"> </i></button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<button class="btn btn-primary" @onclick="CreateTenant">Registrar Locatário</button>
+
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        await TenantService.GetTenants();
+    }
+
+    void UpdateTenant(int id)
+    {
+        NavigationManager.NavigateTo($"tenant/update/{id}");
+    }
+    
+    void CreateTenant()
+    {
+        NavigationManager.NavigateTo($"tenant/create");
+    }
+}

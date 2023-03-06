@@ -1,0 +1,99 @@
+﻿@page "/apartment/create"
+@page "/apartment/update/{id:int}"
+@inject IApartmentService ApartmentService
+@inject IBuildingService BuildingService
+
+@if (id == null) 
+{
+    <PageTitle>Registar novo apartamento</PageTitle>
+    <h3>Registrar novo apartamento</h3>
+}
+else
+{
+    <PageTitle>Editar apartamento @apartment.Number</PageTitle>
+    <h3>Editar apartamento @apartment.Number</h3>
+}
+
+<EditForm Model="apartment" OnSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <div>
+        <label for="Number">Número</label>
+        <InputText id="Number" @bind-Value="apartment.Number" class="form-control"></InputText>
+    </div>
+    <ValidationMessage For="() => apartment.Number" />
+    <div>
+        <label for="RentValue"> Valor do Aluguel</label>
+        <InputNumber id="RentValue" @bind-Value="apartment.RentValue" class="form-control"></InputNumber>
+    </div>
+    <div>
+        <label>Building</label><br />
+        <InputSelect @bind-Value="apartment.BuildingId" class="form-select">
+            @if (BuildingService.Buildings != null)
+            {
+                @foreach (var building in BuildingService.Buildings)
+                {
+                    <option value="@building.Id">@building.Name</option>
+                }
+            }
+        </InputSelect>
+    </div>
+    <ValidationMessage For="() => apartment.BuildingId" />
+    <br />
+    <button type="submit" class="btn btn-primary">@btnText</button>
+    <button type="button" class="btn btn-danger" @onclick="DeleteApartment">Excluir Apartamento</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int? id { get; set; }
+
+    string btnText = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        btnText = id == null ? "Inserir" : "Salvar";
+        await BuildingService.GetBuildings(); 
+    }
+
+    Apartment apartment = new Apartment { Building = new Building() };
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (id == null)
+        {
+            apartment.Building = BuildingService.Buildings[0];
+            apartment.BuildingId = apartment.Building.Id;
+            apartment.IsRented = false;
+            apartment.LandlordId = 1;
+        }
+        else
+        {
+            apartment = await ApartmentService.GetApartment((int)id);
+        }
+    }
+
+    async Task HandleSubmit()
+    {
+        if (id == null)
+        {
+            if (apartment.BuildingId == 0)
+            {
+                throw new Exception("Selecione um Edifício.");
+            }
+            else
+            {
+                await ApartmentService.CreateApartment(apartment);
+            }
+        }
+        else
+        {
+            await ApartmentService.UpdateApartment(apartment);
+        }
+
+    }
+    async Task DeleteApartment()
+    {
+        await ApartmentService.DeleteApartment(apartment.Id);
+    }
+
+}

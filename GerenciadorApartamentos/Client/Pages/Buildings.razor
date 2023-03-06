@@ -1,0 +1,50 @@
+﻿@page "/buildings"
+@inject IBuildingService BuildingService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edifícios</PageTitle>
+
+<h3>Edifícios</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Endereço</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (BuildingService.Buildings != null)
+        {
+        @foreach (var building in BuildingService.Buildings)
+        {
+            <tr>
+                <td>@building.Name</td>
+                <td>@building.Address</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="(()=> UpdateBuilding(building.Id))"><i class=" oi oi-pencil"> </i></button>
+                </td>
+            </tr>
+        }
+        }
+    </tbody>
+</table>
+<button class="btn btn-primary" @onclick="CreateBuilding">Registrar Edifício</button>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await BuildingService.GetBuildings();
+    }
+
+    void UpdateBuilding(int id)
+    {
+        NavigationManager.NavigateTo($"building/update/{id}");
+    }
+
+    void CreateBuilding()
+    {
+        NavigationManager.NavigateTo($"building/create");
+    }
+
+}

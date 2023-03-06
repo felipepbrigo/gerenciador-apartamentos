@@ -1,0 +1,57 @@
+﻿@page "/rentals"
+@inject IRentalService RentalService
+@inject IApartmentService ApartmentService
+
+<PageTitle>Aluguéis</PageTitle>
+
+<h3>Aluguéis</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Locatário</th>
+            <th>Apartamento</th>
+            <th>Edifício</th>
+            <th>Data de Início</th>
+            <th>Data de Encerramento</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (RentalService.Rentals != null)
+        {
+            @foreach (var rental in RentalService.Rentals)
+        {
+            <tr>
+                <td>@rental.Tenant.Name</td>
+                <td>@rental.Apartment.Number</td>
+                <td>@rental.Apartment.Building.Name</td>
+                <td>@rental.StartDate</td>
+                <td>@rental.EndDate</td>
+                    @if (@rental.EndDate == null)
+                    {
+                        <td>
+                            <button class="btn btn-primary" @onclick="(()=> UpdateRental(rental.Id))"><i class=" oi oi-action-undo"> </i></button>
+                        </td>
+                    }
+            </tr>
+        }
+        }
+    </tbody>
+</table>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await RentalService.GetRentals();
+    }
+
+    async Task UpdateRental(int id)
+    {
+        Rental rental = await RentalService.GetRental((int)id);
+        rental.EndDate = DateTime.Today;
+        Apartment apartment = rental.Apartment;
+        apartment.IsRented = false;
+        await RentalService.UpdateRental(rental);
+        await ApartmentService.UpdateApartment(apartment);
+    }
+}

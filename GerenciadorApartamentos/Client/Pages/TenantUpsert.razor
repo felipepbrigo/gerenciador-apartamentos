@@ -1,0 +1,76 @@
+﻿@page "/tenant/create"
+@page "/tenant/update/{id:int}"
+@inject ITenantService TenantService
+@inject NavigationManager NavigationManager
+
+@if (id == null)
+{
+    <PageTitle>Registar novo locatário</PageTitle>
+    <h3>Registrar novo locatário</h3>
+}
+else
+{
+    <PageTitle>Editar locatário @tenant.Name</PageTitle>
+    <h3>Editar locatário @tenant.Name</h3>
+}
+
+<EditForm Model="tenant" OnSubmit="HandleSubmit">
+<DataAnnotationsValidator />
+    <div>
+        <label for="Name">Nome</label>
+        <InputText id="Name" @bind-Value="tenant.Name" class="form-control"></InputText>
+    </div>
+    <ValidationMessage For="() => tenant.Name" />
+    <div>
+        <label for="CPF">CPF</label>
+            <InputText id="CPF" @bind-Value="tenant.CPF" class="form-control"></InputText>
+    </div>
+    <div>
+        <label for="Address"> Endereço</label>
+        <InputText id="Address" @bind-Value="tenant.Address" class="form-control"></InputText>
+    </div>
+    <ValidationMessage For="() => tenant.Address" />
+    <br />
+    <button type="submit" class="btn btn-primary">@btnText</button>
+    <button type="button" class="btn btn-danger" @onclick="DeleteTenant">Excluir Locatário</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int? id { get; set; }
+
+    string btnText = string.Empty;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        btnText = id == null ? "Inserir" : "Salvar";
+    }
+
+    Tenant tenant = new Tenant();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (id != null)
+        {
+            tenant = await TenantService.GetTenant((int)id);
+        }
+    }
+
+    async Task HandleSubmit()
+    {
+        if (id == null)
+        {
+            await TenantService.CreateTenant(tenant);
+        }
+        else
+        {
+            await TenantService.UpdateTenant(tenant);
+        }
+
+    }
+    async Task DeleteTenant()
+    {
+        await TenantService.DeleteTenant(tenant.Id);
+    }
+
+}

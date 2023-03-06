@@ -1,0 +1,12 @@
+C:\Users\felip\Desafio_biopark\GerenciadorApartamentos\GerenciadorApartamentos\Shared\bin\Debug\net6.0\GerenciadorApartamentos.Shared.deps.json
+C:\Users\felip\Desafio_biopark\GerenciadorApartamentos\GerenciadorApartamentos\Shared\bin\Debug\net6.0\GerenciadorApartamentos.Shared.dll
+C:\Users\felip\Desafio_biopark\GerenciadorApartamentos\GerenciadorApartamentos\Shared\bin\Debug\net6.0\GerenciadorApartamentos.Shared.pdb
+C:\Users\felip\Desafio_biopark\GerenciadorApartamentos\GerenciadorApartamentos\Shared\obj\Debug\net6.0\GerenciadorApartamentos.Shared.csproj.AssemblyReference.cache
+C:\Users\felip\Desafio_biopark\GerenciadorApartamentos\GerenciadorApartamentos\Shared\obj\Debug\net6.0\GerenciadorApartamentos.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\felip\Desafio_biopark\GerenciadorApartamentos\GerenciadorApartamentos\Shared\obj\Debug\net6.0\GerenciadorApartamentos.Shared.AssemblyInfoInputs.cache
+C:\Users\felip\Desafio_biopark\GerenciadorApartamentos\GerenciadorApartamentos\Shared\obj\Debug\net6.0\GerenciadorApartamentos.Shared.AssemblyInfo.cs
+C:\Users\felip\Desafio_biopark\GerenciadorApartamentos\GerenciadorApartamentos\Shared\obj\Debug\net6.0\GerenciadorApartamentos.Shared.csproj.CoreCompileInputs.cache
+C:\Users\felip\Desafio_biopark\GerenciadorApartamentos\GerenciadorApartamentos\Shared\obj\Debug\net6.0\GerenciadorApartamentos.Shared.dll
+C:\Users\felip\Desafio_biopark\GerenciadorApartamentos\GerenciadorApartamentos\Shared\obj\Debug\net6.0\refint\GerenciadorApartamentos.Shared.dll
+C:\Users\felip\Desafio_biopark\GerenciadorApartamentos\GerenciadorApartamentos\Shared\obj\Debug\net6.0\GerenciadorApartamentos.Shared.pdb
+C:\Users\felip\Desafio_biopark\GerenciadorApartamentos\GerenciadorApartamentos\Shared\obj\Debug\net6.0\ref\GerenciadorApartamentos.Shared.dll

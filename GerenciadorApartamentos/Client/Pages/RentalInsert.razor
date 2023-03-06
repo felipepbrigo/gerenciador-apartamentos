@@ -1,0 +1,62 @@
+﻿@page "/rental/create/{id:int}"
+@inject IRentalService RentalService
+@inject ITenantService TenantService
+@inject IApartmentService ApartmentService
+
+
+<PageTitle>Aluguel</PageTitle>
+
+<h3>Aluguel</h3>
+
+<EditForm Model="rental" OnSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <div>
+        <label>Locatário</label><br />
+        <InputSelect @bind-Value="rental.TenantId" class="form-select">
+            @if (TenantService.Tenants != null)
+            {
+                @foreach (var tenant in TenantService.Tenants)
+                {
+                    <option value="@tenant.Id">@tenant.Name</option>
+                }
+            }
+        </InputSelect>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Registrar</button>
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    Rental rental = new Rental { Tenant = new Tenant() };
+
+    protected override async Task OnInitializedAsync()
+    {
+        await TenantService.GetTenants();
+    }
+
+    Apartment apartment = new Apartment();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        apartment = await ApartmentService.GetApartment((int)id);
+        rental.Tenant = TenantService.Tenants[0];
+        rental.TenantId = rental.Tenant.Id;
+        rental.ApartmentId = apartment.Id;
+        rental.Apartment = apartment;
+        rental.StartDate = DateTime.Today;//rental.DateTime = DateTime.UtcNow;
+        rental.EndDate = null;
+        apartment.IsRented = true;
+    
+    }
+
+    async Task HandleSubmit()
+    {
+        await RentalService.CreateRental(rental);
+        await ApartmentService.UpdateApartment(apartment);
+    }
+
+}

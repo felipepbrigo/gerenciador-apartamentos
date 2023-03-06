@@ -1,0 +1,75 @@
+﻿@page "/building/create"
+@page "/building/update/{id:int}"
+@inject IApartmentService ApartmentService
+@inject IBuildingService BuildingService
+
+@if (id == null)
+{
+    <PageTitle>Registar novo edifício</PageTitle>
+    <h3>Registrar novo edifício</h3>
+}
+else
+{
+    <PageTitle>Editar edifício @building.Name</PageTitle>
+    <h3>Editar edifício @building.Name</h3>
+}
+
+<EditForm Model="building" OnSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <div>
+        <label for="Name">Nome</label>
+        <InputText id="Name" @bind-Value="building.Name" class="form-control"></InputText>
+    </div>
+    <ValidationMessage For="() => building.Name" />
+    <div>
+        <label for="Address"> Endereço</label>
+        <InputText id="Address" @bind-Value="building.Address" class="form-control"></InputText>
+    </div>
+    <ValidationMessage For="() => building.Address" />
+    <br />
+    <button type="submit" class="btn btn-primary">@btnText</button>
+    <button type="button" class="btn btn-danger" @onclick="DeleteBuilding">Excluir Edifício</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int? id { get; set; }
+
+    string btnText = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        btnText = id == null ? "Inserir" : "Salvar";
+    }
+
+   Building building = new Building();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (id != null)
+        {
+            building = await BuildingService.GetBuilding((int) id);
+        }
+    }
+   
+    async Task HandleSubmit()
+    {
+        if (id == null)
+        {
+            await BuildingService.CreateBuilding(building);
+        }
+        else
+        {
+            await BuildingService.UpdateBuilding(building);
+        }
+
+    }
+    async Task DeleteBuilding()
+    {
+        await BuildingService.DeleteBuilding(building.Id);
+    }
+
+}
+    
+    
+

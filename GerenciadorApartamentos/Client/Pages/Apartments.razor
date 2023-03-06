@@ -1,0 +1,66 @@
+﻿@page "/apartments"
+@inject IApartmentService ApartmentService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Apartamentos</PageTitle>
+
+<h3>Apartamentos</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Número</th>
+            <th>Valor do aluguel</th>
+            <th>Edifício</th>
+            <th>Estado</th>
+            <th>Proprietário</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ApartmentService.Apartments != null)
+        {
+            @foreach (var apartment in ApartmentService.Apartments)
+            {
+                <tr>
+                    <td>@apartment.Number</td>
+                    <td>@apartment.RentValue</td>
+                    <td>@apartment.Building.Name</td>
+                    <td>@(apartment.IsRented ? "alugado" : "disponível")</td>
+                    <td>@apartment.Landlord.Name</td>
+                    @if (!apartment.IsRented)
+                    {
+                        <td>
+                            <button class="btn btn-primary" @onclick="(()=> UpdateApartment(apartment.Id))"><i class=" oi oi-pencil"> </i></button>
+                            <button class="btn btn-primary" @onclick="(()=> RentApartment(apartment.Id))"><i class=" oi oi-book"> </i></button>
+                        </td>
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<button class="btn btn-primary" @onclick="CreateApartment">Registrar Apartamento</button>
+
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await ApartmentService.GetApartments();
+    }
+
+    void UpdateApartment(int id)
+    {
+        NavigationManager.NavigateTo($"apartment/update/{id}");
+    }
+
+    void CreateApartment()
+    {
+        NavigationManager.NavigateTo($"apartment/create");
+    }
+
+    void RentApartment(int id)
+    {
+        NavigationManager.NavigateTo($"rental/create/{id}");
+    }
+}
