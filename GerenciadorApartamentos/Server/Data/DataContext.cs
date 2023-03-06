@@ -60,6 +60,14 @@
                     Name = "Biopark",
                     Email = "comercial@biopark.gg"
                 });
+            modelBuilder.Entity<Tenant>().HasData(
+                new Tenant
+                {
+                    Id = 1,
+                    Name = "Joao",
+                    CPF = "123456789",
+                    Address = "minha rua, 322"
+                });
         }
         public DbSet<Building> Buildings { get; set; }
 

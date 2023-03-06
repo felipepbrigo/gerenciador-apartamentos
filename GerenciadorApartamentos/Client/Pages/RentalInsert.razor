@@ -50,13 +50,20 @@
         rental.StartDate = DateTime.Today;//rental.DateTime = DateTime.UtcNow;
         rental.EndDate = null;
         apartment.IsRented = true;
-    
+
     }
 
     async Task HandleSubmit()
     {
-        await RentalService.CreateRental(rental);
-        await ApartmentService.UpdateApartment(apartment);
+        if (rental.TenantId == null)
+        {
+            
+        }
+        else
+        {
+            await RentalService.CreateRental(rental);
+            await ApartmentService.UpdateApartment(apartment);
+        }
     }
 
 }

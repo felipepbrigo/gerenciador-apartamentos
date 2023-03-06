@@ -40,7 +40,10 @@ else
     <ValidationMessage For="() => apartment.BuildingId" />
     <br />
     <button type="submit" class="btn btn-primary">@btnText</button>
-    <button type="button" class="btn btn-danger" @onclick="DeleteApartment">Excluir Apartamento</button>
+    @if (id != null)
+    {
+        <button type="button" class="btn btn-danger" @onclick="DeleteApartment">Excluir Apartamento</button>
+    }
 </EditForm>
 
 @code {

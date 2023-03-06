@@ -211,6 +211,15 @@ namespace GerenciadorApartamentos.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tenants");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "minha rua, 322",
+                            CPF = "123456789",
+                            Name = "Joao"
+                        });
                 });
 
             modelBuilder.Entity("GerenciadorApartamentos.Shared.Apartment", b =>

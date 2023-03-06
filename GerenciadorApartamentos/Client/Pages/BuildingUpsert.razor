@@ -28,7 +28,10 @@ else
     <ValidationMessage For="() => building.Address" />
     <br />
     <button type="submit" class="btn btn-primary">@btnText</button>
+    @if (id != null)
+    {
     <button type="button" class="btn btn-danger" @onclick="DeleteBuilding">Excluir Edifício</button>
+    }
 </EditForm>
 
 @code {

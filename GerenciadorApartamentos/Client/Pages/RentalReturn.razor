@@ -20,11 +20,11 @@
         @if (RentalService.Rentals != null)
         {
             @foreach (var rental in RentalService.Rentals)
-        {
+            {
             <tr>
                 <td>@rental.Tenant.Name</td>
                 <td>@rental.Apartment.Number</td>
-                <td>@rental.Apartment.Building.Name</td>
+                <td>@rental.Apartment.Building?.Name</td>
                 <td>@rental.StartDate</td>
                 <td>@rental.EndDate</td>
                     @if (@rental.EndDate == null)
@@ -34,7 +34,7 @@
                         </td>
                     }
             </tr>
-        }
+            }
         }
     </tbody>
 </table>

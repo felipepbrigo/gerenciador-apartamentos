@@ -196,15 +196,15 @@
       "mscorlib.dll": "sha256-mvS0gmCEk3NPPJPuIX5UWyIRyNxQ4WYYES39CBT9CK0=",
       "netstandard.dll": "sha256-6NXprR7wyUZxpdXxaSPHSoC5uOL5UCc7bsZG3TSuVxE=",
       "System.Private.CoreLib.dll": "sha256-igtwZSR0\/lrbmwL\/XiTsEkIeSL+736GHTZPReYguZCQ=",
-      "GerenciadorApartamentos.Shared.dll": "sha256-5zk5M7aYbjIy1vo2tzwUIqkFyPk4p9pBYLWH\/tV6CAg=",
-      "GerenciadorApartamentos.Client.dll": "sha256-3s38uuPU85oO30W9AXpDQ8qaKZIvz3TH87e5kAnY+OY="
+      "GerenciadorApartamentos.Shared.dll": "sha256-uveS8JvhYCE4hbhNXE+Qwzp5tsobRM5vVRQBJq31QaU=",
+      "GerenciadorApartamentos.Client.dll": "sha256-A4zPVu5YkzyvG90uOr4Q8CIyAmXHgG+JhZJbVzjZuqM="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "GerenciadorApartamentos.Shared.pdb": "sha256-KzC5Mf7\/czs4jk\/vWoPnG7h5iPVr29kDt6ZkewSJQbI=",
-      "GerenciadorApartamentos.Client.pdb": "sha256-99RgpkHgPLbpuZc9EWRn3ONAa1XrMjnzTkcqXGTGWvQ="
+      "GerenciadorApartamentos.Shared.pdb": "sha256-L08gnSkf7SyGlq80uc0VSzJNVJO9\/09RA3J8yCBPaOc=",
+      "GerenciadorApartamentos.Client.pdb": "sha256-AzBhQ33B1yN+cfezkQHKvtAT9Ul+GT9V7eM6xclY3Wk="
     },
     "runtime": {
       "dotnet.6.0.14.jgtxb26vow.js": "sha256-54cJ6JdGhGbKaLWxHfRYzYbuyRq2wlK\/ZDzfSXD3FEs=",

@@ -36,7 +36,10 @@ namespace GerenciadorApartamentos.Server.Controllers
         {
             rental.Apartment = null;
             rental.Tenant = null;
-
+            if (rental.TenantId == null || rental.TenantId.Value == 0)
+            {
+                return BadRequest("Nenhum inquilino selecionado.");
+            }
             _context.Rentals.Add(rental);
             await _context.SaveChangesAsync();
 
