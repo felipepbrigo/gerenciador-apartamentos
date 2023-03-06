@@ -13,7 +13,7 @@ Para executar o projeto localmente, siga as instruções abaixo:
 
 Certifique-se de ter o Visual Studio 2022 com .NET 6 SDK e and ASP.NET workload instalados em sua máquina. Para verificar se você tem o SDK instalado, abra um terminal e execute o comando dotnet --version. Caso não tenha o SDK instalado, faça o download e a instalação através do site oficial da Microsoft. É necessário ter o postgreSQL instalado.
 
-Os seguintes packages foram instalados no Visual Studio 2022 através do Package manage console:
+Os seguintes packages foram instalados no Visual Studio 2022 através do Package manager console (podem também ser encontradas ao acessar ao gerenciar as propriedades NuGet dentro do VS), mas serão baixados automáticamente ao abrir o projeto utilizando o Visual Studio 2022 ou Visual Studio Code 2022:
    
    > Microsoft.AspNetCore.Components.WebAssembly.Server      6.0.1       6.0.1   
    > Microsoft.EntityFrameworkCore                           6.0.1       6.0.1   
@@ -38,11 +38,12 @@ cd .\Server\
 
 No arquivo appsettings.json, altere as informações de conexão com o banco de dados PostgreSQL de acordo com as configurações do seu ambiente. Certifique-se de ter o PostgreSQL instalado e em execução.
 
-Execute as migrações do banco de dados para criar as tabelas necessárias com os seguintes comandos:
+Através do Package manager console:
+Rode o comando para que seja instalada o dotnet EF core tools:
 
-dotnet ef migrations remove
+dotnet tool install --global dotnet-ef
 
-dotnet ef migratios add initial
+Ainda no package manager console execute as migrações do banco de dados para criar as tabelas necessárias com o seguinte comandos:
 
 dotnet ef database update
 
